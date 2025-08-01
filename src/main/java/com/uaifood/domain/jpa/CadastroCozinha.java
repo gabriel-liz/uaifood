@@ -22,5 +22,12 @@ public class CadastroCozinha {
 		//return manager.createQuery("from Cozinha", Cozinha.class)
 				//.getResultList();
 	}
+	
+	public Cozinha adicionar(Cozinha cozinha) {
+		
+		return manager.merge(cozinha);
+		
+		
+	}
 
 }
