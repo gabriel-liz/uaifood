@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.uaifood.UaifoodApiApplication;
 import com.uaifood.domain.model.Cozinha;
+import com.uaifood.domain.repository.CozinhaRepository;
 
 public class InclusaoCozinhaMain {
 
@@ -16,7 +17,7 @@ public class InclusaoCozinhaMain {
 				.run(args);
 		
 		
-		CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
+		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 				
 		Cozinha cozinha1 = new Cozinha();
 		cozinha1.setNome("Brasileira");
@@ -24,8 +25,8 @@ public class InclusaoCozinhaMain {
 		Cozinha cozinha2 = new Cozinha();
 		cozinha2.setNome("Japonesa");
 		
-		cadastroCozinha.salvar(cozinha1);
-		cadastroCozinha.salvar(cozinha2);
+		cozinhaRepository.salvar(cozinha1);
+		cozinhaRepository.salvar(cozinha2);
 		
 	}
 

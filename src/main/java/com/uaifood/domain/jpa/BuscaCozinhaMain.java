@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.uaifood.UaifoodApiApplication;
 import com.uaifood.domain.model.Cozinha;
+import com.uaifood.domain.repository.CozinhaRepository;
 
 public class BuscaCozinhaMain {
 
@@ -16,8 +17,8 @@ public class BuscaCozinhaMain {
 				.run(args);
 		
 		
-		CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
-		Cozinha cozinha = cadastroCozinha.buscar(1L);		
+		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		Cozinha cozinha = cozinhaRepository.buscar(1L);		
 		
 		System.out.println(cozinha.getNome());
 		

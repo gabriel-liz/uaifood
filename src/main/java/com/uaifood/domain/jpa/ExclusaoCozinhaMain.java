@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.uaifood.UaifoodApiApplication;
 import com.uaifood.domain.model.Cozinha;
+import com.uaifood.domain.repository.CozinhaRepository;
 
 public class ExclusaoCozinhaMain {
 
@@ -16,12 +17,12 @@ public class ExclusaoCozinhaMain {
 				.run(args);
 		
 		
-		CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
+		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 		
 		Cozinha cozinha = new Cozinha();
 		cozinha.setId(1L);
 		
-		cadastroCozinha.remover(cozinha);
+		cozinhaRepository.remover(cozinha);
 		
 	}
 

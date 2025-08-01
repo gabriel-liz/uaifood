@@ -1,6 +1,5 @@
 package com.uaifood.domain.jpa;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.boot.WebApplicationType;
@@ -9,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.uaifood.UaifoodApiApplication;
 import com.uaifood.domain.model.Cozinha;
+import com.uaifood.domain.repository.CozinhaRepository;
 
 public class ConsultaCozinhaMain {
 
@@ -19,8 +19,8 @@ public class ConsultaCozinhaMain {
 				.run(args);
 		
 		
-		CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
-		List<Cozinha> cozinhas = cadastroCozinha.listar();
+		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		List<Cozinha> cozinhas = cozinhaRepository.listar();
 		
 		for(Cozinha cozinha : cozinhas) {
 			System.out.println(cozinha.getNome());
