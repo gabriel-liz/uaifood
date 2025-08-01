@@ -17,12 +17,12 @@ public class ExclusaoCozinhaMain {
 				.run(args);
 		
 		
-		CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+		CozinhaRepository cozinhas = applicationContext.getBean(CozinhaRepository.class);
 		
 		Cozinha cozinha = new Cozinha();
 		cozinha.setId(1L);
 		
-		cozinhaRepository.remover(cozinha);
+		cozinhas.remover(cozinha);
 		
 	}
 
