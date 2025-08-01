@@ -1,13 +1,11 @@
 package com.uaifood.domain.model;
 
 import java.util.Objects;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
 
 @Entity
 //@Table(name= "cozinhas") não colocando essa anotação a tabela sera criada com o nome da classe

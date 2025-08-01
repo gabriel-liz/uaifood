@@ -3,12 +3,14 @@ package com.uaifood.domain.jpa;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.uaifood.domain.model.Cozinha;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+
 
 @Component
 public class CadastroCozinha {
@@ -23,10 +25,9 @@ public class CadastroCozinha {
 				//.getResultList();
 	}
 	
-	public Cozinha adicionar(Cozinha cozinha) {
-		
-		return manager.merge(cozinha);
-		
+	@Transactional
+	public Cozinha adicionar(Cozinha cozinha) {		
+		return manager.merge(cozinha);		
 		
 	}
 

@@ -1,8 +1,5 @@
 package com.uaifood.domain.jpa;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
