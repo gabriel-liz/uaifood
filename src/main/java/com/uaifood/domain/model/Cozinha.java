@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-//@Table(name= "cozinhas") não colocando essa anotação a tabela sera criada com o nome da classe
 public class Cozinha {
 	
 	@EqualsAndHashCode.Include
