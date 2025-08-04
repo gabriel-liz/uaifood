@@ -2,15 +2,17 @@ package com.uaifood.infrastructure.repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.uaifood.domain.model.Cozinha;
 import com.uaifood.domain.repository.CozinhaRepository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+
 
 @Component
 public class CozinhaRepositoryImpl implements CozinhaRepository{
@@ -19,7 +21,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository{
 	private EntityManager manager;
 	
 	@Override
-	public List<Cozinha> todas(){
+	public List<Cozinha> listar(){
 		TypedQuery<Cozinha> query = manager.createQuery("from Cozinha", Cozinha.class);
 		return query.getResultList();
 		//return manager.createQuery("from Cozinha", Cozinha.class)
@@ -27,7 +29,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository{
 	}
 	
 	@Override
-	public Cozinha porId(Long id) {
+	public Cozinha buscar(Long id) {
 		return manager.find(Cozinha.class, id);
 	}
 	
@@ -41,7 +43,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository{
 	@Transactional
 	@Override
 	public void remover(Cozinha cozinha) {
-		cozinha = porId(cozinha.getId());
+		cozinha = buscar(cozinha.getId());
 		manager.remove(cozinha);
 	}
 	

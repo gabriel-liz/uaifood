@@ -2,13 +2,15 @@ package com.uaifood.infrastructure.repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Component;
 
 import com.uaifood.domain.model.FormaPagamento;
 import com.uaifood.domain.repository.FormaPagamentoRepository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+
 
 @Component
 public class FormaPagamentoRepositoryImpl implements FormaPagamentoRepository {

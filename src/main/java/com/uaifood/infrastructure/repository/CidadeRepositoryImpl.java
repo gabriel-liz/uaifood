@@ -2,11 +2,11 @@ package com.uaifood.infrastructure.repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import com.uaifood.domain.model.Cidade;
 import com.uaifood.domain.repository.CidadeRepository;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 public class CidadeRepositoryImpl implements CidadeRepository{
 	

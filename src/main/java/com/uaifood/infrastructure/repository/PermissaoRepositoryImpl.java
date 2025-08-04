@@ -2,11 +2,12 @@ package com.uaifood.infrastructure.repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import com.uaifood.domain.model.Permissao;
 import com.uaifood.domain.repository.PermissaoRepository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 public class PermissaoRepositoryImpl implements PermissaoRepository{
 	

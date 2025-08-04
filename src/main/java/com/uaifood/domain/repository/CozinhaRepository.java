@@ -6,8 +6,8 @@ import com.uaifood.domain.model.Cozinha;
 
 public interface CozinhaRepository {
 	
-	List<Cozinha> todas();
-	Cozinha porId(Long id);
+	List<Cozinha> listar();
+	Cozinha buscar(Long id);
 	Cozinha adicionar(Cozinha cozinha);
 	void remover(Cozinha cozinha);
 
