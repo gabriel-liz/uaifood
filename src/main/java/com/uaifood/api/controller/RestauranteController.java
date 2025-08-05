@@ -61,17 +61,14 @@ public class RestauranteController {
     public ResponseEntity<?> atualizar(@PathVariable Long restauranteId,
         @RequestBody Restaurante restaurante) {
         try {
-			Restaurante restauranteAtual = restauranteRepository.buscar(restauranteId);
-			
+			Restaurante restauranteAtual = restauranteRepository.buscar(restauranteId);			
 			if (restauranteAtual != null) {
 				BeanUtils.copyProperties(restaurante, restauranteAtual, "id");
 				
 				restauranteAtual = cadastroRestaurante.salvar(restauranteAtual);
 				return ResponseEntity.ok(restauranteAtual);
-			}
-			
-			return ResponseEntity.notFound().build();
-		
+			}			
+			return ResponseEntity.notFound().build();		
 		} catch (EntidadeNaoEncontradaException e) {
 			return ResponseEntity.badRequest()
 					.body(e.getMessage());
