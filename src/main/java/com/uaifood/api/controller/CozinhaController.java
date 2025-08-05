@@ -68,12 +68,14 @@ public class CozinhaController {
 	public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId, 
 			@RequestBody Cozinha cozinha){
 		Cozinha cozinhaAtual = cozinhaRepository.buscar(cozinhaId);
-		//cozinhaAtual.setNome(cozinha.getNome()); abaixo é uma forma de fazer
-		BeanUtils.copyProperties(cozinha, cozinhaAtual, "id"); //,id indica que ira ignorar o id na hora de alterar
+		if(cozinhaAtual != null) {
+			//	cozinhaAtual.setNome(cozinha.getNome()); abaixo é uma forma de fazer
+			BeanUtils.copyProperties(cozinha, cozinhaAtual, "id"); //,id indica que ira ignorar o id na hora de alterar			
+			cozinhaRepository.salvar(cozinhaAtual);
+			return ResponseEntity.ok(cozinhaAtual);
+		}
 		
-		cozinhaRepository.salvar(cozinhaAtual);
-		
-		return ResponseEntity.ok(cozinhaAtual);
+		return ResponseEntity.notFound().build();
 		
 		
 	}
