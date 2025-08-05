@@ -6,8 +6,8 @@ import com.uaifood.domain.model.Restaurante;
 
 public interface RestauranteRepository {
 	
-	List<Restaurante> todas();
-	Restaurante porId(Long id);
+	List<Restaurante> listar();
+	Restaurante buscar(Long id);
 	Restaurante adicionar(Restaurante restaurante);
 	void remover(Restaurante restaurante);
 
