@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uaifood.domain.exception.EntidadeNaoEncontradaException;
 import com.uaifood.domain.model.Restaurante;
 import com.uaifood.domain.repository.RestauranteRepository;
 import com.uaifood.domain.service.CadastroRestauranteService;
@@ -42,9 +43,15 @@ public class RestauranteController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public Restaurante adicionar(@RequestBody Restaurante restaurante){
-		return cadastroRestaurante.salvar(restaurante);
+	@PostMapping	
+	public ResponseEntity<?> adicionar(@RequestBody Restaurante restaurante){
+		try {
+			restaurante = cadastroRestaurante.salvar(restaurante);
+			
+			return ResponseEntity.status(HttpStatus.CREATED)
+					.body(restaurante);
+		}catch(EntidadeNaoEncontradaException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}	
 }
