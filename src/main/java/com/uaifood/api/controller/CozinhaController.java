@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uaifood.api.model.CozinhasXmlWrapper;
 import com.uaifood.domain.model.Cozinha;
 import com.uaifood.domain.repository.CozinhaRepository;
+import com.uaifood.domain.service.CadastroCozinhaService;
 
 
 @RestController
@@ -31,6 +32,9 @@ import com.uaifood.domain.repository.CozinhaRepository;
 public class CozinhaController {
 
     private final CozinhaRepositoryImpl cozinhaRepositoryImpl;
+    
+    @Autowired
+    private CadastroCozinhaService cadastroCozinha;
 	
 	
 	@Autowired
@@ -62,8 +66,8 @@ public class CozinhaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cozinha adicioanr(@RequestBody Cozinha cozinha) {
-		return cozinhaRepository.salvar(cozinha);
+	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
+		return cadastroCozinha.salvar(cozinha);
 	}
 	
 	@PutMapping("/{cozinhaId}")
