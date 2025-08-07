@@ -7,29 +7,30 @@ import org.springframework.stereotype.Service;
 
 import com.uaifood.domain.exception.EntidadeEmUsoException;
 import com.uaifood.domain.exception.EntidadeNaoEncontradaException;
-import com.uaifood.domain.model.Estado;
-import com.uaifood.domain.repository.EstadoRepository;
+import com.uaifood.domain.model.Permissao;
+import com.uaifood.domain.repository.PermissaoRepository;
 
 @Service
-public class CadastroEstadoService {
-
+public class CadastroPermissaoService {
+	
 	@Autowired
-	private EstadoRepository estadoRepository;
-
-	public Estado salvar(Estado estado) {
-		return estadoRepository.save(estado);
+	private PermissaoRepository permissaoRepository;
+	
+	public Permissao salvar(Permissao permissao) {
+		return permissaoRepository.save(permissao);
 	}
-
-	public void excluir(Long estadoId) {
+	
+	public void excluir(Long permissaoId) {
 		try {
-			estadoRepository.deleteById(estadoId);
+			permissaoRepository.deleteById(permissaoId);
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntidadeNaoEncontradaException(
-					String.format("Não existe cadastro de estado com código %d", estadoId));
+					String.format("Não existe cadastro de Permissão com código %d", permissaoId));
 		} catch (DataIntegrityViolationException e) {
 			throw new EntidadeEmUsoException(
-					String.format("Estado de código %d não pode ser removido, pois está em uso", estadoId));
+					String.format("Forma de Pagamento de código %d não pode ser removida, pois está em uso", permissaoId));
 		}
+		
 	}
 
 }

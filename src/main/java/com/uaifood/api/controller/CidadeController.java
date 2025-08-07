@@ -1,6 +1,7 @@
 package com.uaifood.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,23 +29,21 @@ public class CidadeController {
 
 	@Autowired
 	private CadastroCidadeService cadastroCidade;
-	
+
 	@Autowired
 	private CidadeRepository cidadeRepository;
 
-	
-
 	@GetMapping
 	public List<Cidade> listar() {
-		return cidadeRepository.listar();
+		return cidadeRepository.findAll();
 	}
 
 	@GetMapping("/{cidadeId}")
 	public ResponseEntity<Cidade> buscar(@PathVariable Long cidadeId) {
-		Cidade cidade = cidadeRepository.buscar(cidadeId);
+		Optional<Cidade> cidade = cidadeRepository.findById(cidadeId);
 
-		if (cidade != null) {
-			return ResponseEntity.ok(cidade);
+		if (cidade.isPresent()) {
+			return ResponseEntity.ok(cidade.get());
 		}
 		return ResponseEntity.notFound().build();
 	}
@@ -64,31 +63,28 @@ public class CidadeController {
 	@PutMapping("/{cidadeId}")
 	public ResponseEntity<?> atualizar(@PathVariable Long cidadeId, @RequestBody Cidade cidade) {
 		try {
-			Cidade cidadeAtual = cidadeRepository.buscar(cidadeId);
-			if (cidadeAtual != null) {
-				BeanUtils.copyProperties(cidade, cidadeAtual, "id");
-				cidadeAtual = cadastroCidade.salvar(cidadeAtual);
-				return ResponseEntity.ok(cidadeAtual);
+			Optional<Cidade> cidadeAtual = cidadeRepository.findById(cidadeId);
+			if (cidadeAtual.isPresent()) {
+				BeanUtils.copyProperties(cidade, cidadeAtual.get(), "id");
+				Cidade cidadeSalva = cadastroCidade.salvar(cidadeAtual.get());
+				return ResponseEntity.ok(cidadeSalva);
 			}
 			return ResponseEntity.notFound().build();
 		} catch (EntidadeNaoEncontradaException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
-	
+
 	@DeleteMapping("/{cidadeId}")
-	public ResponseEntity<?> remover(@PathVariable Long cidadeId){
+	public ResponseEntity<?> remover(@PathVariable Long cidadeId) {
 		try {
 			cadastroCidade.excluir(cidadeId);
 			return ResponseEntity.noContent().build();
-		}catch (EntidadeNaoEncontradaException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body(e.getMessage());
-		}catch (EntidadeEmUsoException e) {
-			return ResponseEntity.status(HttpStatus.CONFLICT)
-					.body(e.getMessage());
+		} catch (EntidadeNaoEncontradaException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		} catch (EntidadeEmUsoException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
 		}
 	}
-	
 
 }

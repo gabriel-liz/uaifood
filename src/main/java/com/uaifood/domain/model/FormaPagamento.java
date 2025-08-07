@@ -2,6 +2,7 @@ package com.uaifood.domain.model;
 
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +12,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@javax.persistence.Entity
+@Entity
 public class FormaPagamento {
 	
 	
@@ -22,4 +23,5 @@ public class FormaPagamento {
 	
 	@Column(nullable = false)
 	private String descricao;
+	
 }
