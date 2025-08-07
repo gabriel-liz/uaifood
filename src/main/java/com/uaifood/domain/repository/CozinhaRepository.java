@@ -10,6 +10,9 @@ import com.uaifood.domain.model.Cozinha;
 @Repository
 public interface CozinhaRepository extends JpaRepository<Cozinha, Long> {
 	
-	//List<Cozinha> consultarPorNome(String nome);
+	//Faz a pesquisa por Nome
+	//List<Cozinha> nome(String nome);
+	//List<Cozinha> findByNome(String nome);
+	List<Cozinha> findByNomeContaining(String nome);
 	
 }
