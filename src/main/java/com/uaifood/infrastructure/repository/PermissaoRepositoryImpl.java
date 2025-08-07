@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.uaifood.domain.model.Permissao;
 import com.uaifood.domain.repository.PermissaoRepository;
 
@@ -24,12 +26,14 @@ public class PermissaoRepositoryImpl implements PermissaoRepository{
 	public Permissao porId(Long id) {
 		return manager.find(Permissao.class, id); 
 	}
-
+	
+	@Transactional
 	@Override
-	public Permissao adicionar(Permissao permissao) {
+	public Permissao salvar(Permissao permissao) {
 		return manager.merge(permissao);
 	}
-
+	
+	@Transactional
 	@Override
 	public void remover(Permissao permissao) {
 		permissao = porId(permissao.getId());

@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.uaifood.domain.model.FormaPagamento;
 import com.uaifood.domain.repository.FormaPagamentoRepository;
@@ -29,12 +30,14 @@ public class FormaPagamentoRepositoryImpl implements FormaPagamentoRepository {
 	public FormaPagamento porId(Long id) {
 		return manager.find(FormaPagamento.class, id);
 	}
-
+	
+	@Transactional
 	@Override
-	public FormaPagamento adicionar(FormaPagamento formaPagamento) {
+	public FormaPagamento salvar(FormaPagamento formaPagamento) {
 		return manager.merge(formaPagamento);
 	}
-
+	
+	@Transactional
 	@Override
 	public void remover(FormaPagamento formaPagamento) {
 		formaPagamento = porId(formaPagamento.getId());
