@@ -18,7 +18,7 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
 	//Tambem funciona assim
 	//List<Restaurante> queryQualquerCoisaByTaxaFreteBetween(BigDecimal taxaInicial, BigDecimal taxaFinal);
 	
-	@Query("from Restaurante where nome like %:nome% and cozinha.id = :id")
+	//@Query("from Restaurante where nome like %:nome% and cozinha.id = :id")
 	List<Restaurante> consultarPorNome(String nome, @Param("id") Long cozinhaId);
 	//  O metodo acima faz as mesmas coisas que o metodo comentado abaixo, porem sem expor o nome dos atributos. Para testar apenas mudar a chamado na classe TesteController
 	//	List<Restaurante> findByNomeContainingAndCozinhaId(String nome, Long cozinhaId);
