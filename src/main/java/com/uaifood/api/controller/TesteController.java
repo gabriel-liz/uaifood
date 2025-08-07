@@ -2,6 +2,7 @@ package com.uaifood.api.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,14 +31,39 @@ public class TesteController {
 		return cozinhaRepository.findByNomeContaining(nome);
 	}
 	
+	@GetMapping("/cozinhas/unica-por-nome")
+	public Optional<Cozinha> cozihaPorNome(String nome){
+		return cozinhaRepository.findByNome(nome);
+	}
+	
+	@GetMapping("/cozinhas/exists")
+	public boolean cozihaExists(String nome){		
+		return cozinhaRepository.existsByNome(nome);
+	}
+	
 	@GetMapping("/restaurantes/por-taxa-frete")
 	public List<Restaurante> restaurantesPorTaxaFrete(BigDecimal taxaInicial,BigDecimal taxaFinal){
 		return restauranteRepository.findByTaxaFreteBetween(taxaInicial, taxaFinal);
 	}
 	
 	@GetMapping("/restaurantes/por-nome")
-	public List<Restaurante> restaurantesPorTaxaFrete(String nome, Long cozinhaId){
+	public List<Restaurante> restaurantesPorNomeECozinha(String nome, Long cozinhaId){
 		return restauranteRepository.findByNomeContainingAndCozinhaId(nome, cozinhaId);
 	}
 
+	@GetMapping("/restaurantes/primeiro-por-nome")
+	public Optional<Restaurante> restaurantesPrimeiroPorNome(String nome){
+		return restauranteRepository.findFirstByNomeContaining(nome);
+	}
+	
+	@GetMapping("/restaurantes/top2-por-nome")
+	public List<Restaurante> restaurantesTop2PorNome(String nome){
+		return restauranteRepository.findTop2ByNomeContaining(nome);
+	}
+	
+	@GetMapping("/restaurantes/count-por-cozinha")
+	public int restauranteCountPorCozinha(Long cozinhaId){
+		return restauranteRepository.countByCozinhaId(cozinhaId);
+	}	
+	
 }
