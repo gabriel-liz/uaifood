@@ -14,6 +14,8 @@ import com.uaifood.domain.model.Cozinha;
 import com.uaifood.domain.model.Restaurante;
 import com.uaifood.domain.repository.CozinhaRepository;
 import com.uaifood.domain.repository.RestauranteRepository;
+import com.uaifood.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
+import com.uaifood.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -70,6 +72,14 @@ public class TesteController {
 	public List<Restaurante> restaurantePorNomeFrete(String nome,
 			BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal){
 		return restauranteRepository.find(nome, taxaFreteInicial, taxaFreteFinal);
+	}
+	
+	@GetMapping("/restaurantes/com-frete-gratis")
+	public List<Restaurante> restauranteComFreteGratis(String nome){
+		var comFreteGratis = new RestauranteComFreteGratisSpec();
+		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+		
+		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
 	}
 	
 }
