@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.uaifood.domain.model.Cozinha;
 
 @Repository
-public interface CozinhaRepository extends JpaRepository<Cozinha, Long> {
+public interface CozinhaRepository extends CustomJpaRepository<Cozinha, Long> {
 	
 	//Faz a pesquisa por Nome
 	//List<Cozinha> nome(String nome);
