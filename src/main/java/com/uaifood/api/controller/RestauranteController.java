@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uaifood.domain.exception.EntidadeNaoEncontradaException;
+import com.uaifood.domain.exception.NegocioException;
 import com.uaifood.domain.model.Restaurante;
 import com.uaifood.domain.repository.RestauranteRepository;
 import com.uaifood.domain.service.CadastroRestauranteService;
@@ -48,13 +49,11 @@ public class RestauranteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<?> adicionar(@RequestBody Restaurante restaurante) {
+	public Restaurante adicionar(@RequestBody Restaurante restaurante) {
 		try {
-			restaurante = cadastroRestaurante.salvar(restaurante);
-
-			return ResponseEntity.status(HttpStatus.CREATED).body(restaurante);
+			return cadastroRestaurante.salvar(restaurante);
 		} catch (EntidadeNaoEncontradaException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			throw new NegocioException(e.getMessage());
 		}
 	}
 
@@ -62,7 +61,13 @@ public class RestauranteController {
 	public Restaurante atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante) {
 		Restaurante restauranteAtual = cadastroRestaurante.buscarOuFalhar(restauranteId);
 		BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamento", "endereco", "dataCadastro", "produtos");
-		return cadastroRestaurante.salvar(restauranteAtual);
+		
+		try {
+			return cadastroRestaurante.salvar(restauranteAtual);	
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}
+		
 	}
 
 	@DeleteMapping("/{restauranteId}")
