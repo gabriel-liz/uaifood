@@ -35,13 +35,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 		ProblemType problemType = ProblemType.ERRO_DE_SISTEMA;
 		String detail = MSG_ERRO_GENERICO_USUARIO_FINAL;
-
-		// Importante colocar o printStackTrace (pelo menos por enquanto, que não
-		// estamos
-		// fazendo logging) para mostrar a stacktrace no console
-		// Se não fizer isso, você não vai ver a stacktrace de exceptions que seriam
-		// importantes
-		// para você durante, especialmente na fase de desenvolvimento
 		ex.printStackTrace();
 
 		Problem problem = createProblemBuilder(status, problemType, detail)
@@ -99,7 +92,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		if (rootCause instanceof InvalidFormatException) {
 			return handleInvalidFormat((InvalidFormatException) rootCause, headers, status, request);
 		} else if (rootCause instanceof PropertyBindingException) {
-			return handlePropertyBindingException((PropertyBindingException) rootCause, headers, status, request);
+			return handlePropertyBinding((PropertyBindingException) rootCause, headers, status, request);
 
 		}
 
@@ -178,12 +171,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 					.timestamp(LocalDateTime.now())
 					.tittle(status.getReasonPhrase())
 					.status(status.value())
+					.userMessage(MSG_ERRO_GENERICO_USUARIO_FINAL)
 					.build();
 		} else if (body instanceof String) {
 			body = Problem.builder()
 					.timestamp(LocalDateTime.now())
 					.tittle((String) body)
 					.status(status.value())
+					.userMessage(MSG_ERRO_GENERICO_USUARIO_FINAL)
 					.build();
 		}
 
@@ -200,7 +195,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 				.detail(detail);
 	}
 
-	private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException e, HttpHeaders headers,
+	private ResponseEntity<Object> handlePropertyBinding(PropertyBindingException e, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
 
 		String path = joinPath(e.getPath());
