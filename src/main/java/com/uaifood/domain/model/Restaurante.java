@@ -16,8 +16,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -47,9 +49,9 @@ public class Restaurante {
 	@PositiveOrZero
 	@Column(nullable = false)
 	private BigDecimal taxaFrete;
-
-//	@JsonIgnore
-//	@JsonIgnoreProperties("hibernateLazyInitializer")
+	
+	@Valid //Diz para o beanValidation validar tambem as propriedades de cozinha
+	@NotNull
 	@ManyToOne // (fetch = FetchType.LAZY)
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
