@@ -39,8 +39,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
-
-		body = Problema.builder().dataHora(LocalDateTime.now()).mensagem(status.getReasonPhrase()).build();
+		if(body == null) {
+			body = Problema.builder().dataHora(LocalDateTime.now()).mensagem(status.getReasonPhrase()).build();
+		} else if(body instanceof String) {
+			body = Problema.builder()
+					.dataHora(LocalDateTime.now())
+					.mensagem((String) body)
+					.build();
+		}
 
 		return super.handleExceptionInternal(ex, body, headers, status, request);
 	}
