@@ -12,7 +12,7 @@ public enum ProblemType {
 	ERRO_NEGOCIO("/erro-negocio", "Violação de regra de negócio");
 
 	private String tittle;
-	private String uri;
+	private String uri;	
 
 	private ProblemType(String path, String tittle) {
 		this.uri = "localhost:8080" + path;
