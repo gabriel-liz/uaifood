@@ -1,5 +1,6 @@
 package com.uaifood.api.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uaifood.api.exceptionhandler.Problema;
 import com.uaifood.domain.exception.EntidadeNaoEncontradaException;
 import com.uaifood.domain.exception.EstadoNaoEncontradoException;
 import com.uaifood.domain.exception.NegocioException;
@@ -73,15 +75,24 @@ public class CidadeController {
 	@ExceptionHandler(EntidadeNaoEncontradaException.class)
 	public ResponseEntity<?> tratarEntidadeNaoEncontradaException(
 			EntidadeNaoEncontradaException e){
+		
+		Problema problema = Problema.builder()
+				.dataHora(LocalDateTime.now())
+				.mensagem(e.getMessage()).build();
+		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND)
-				.body(e.getMessage());
+				.body(problema);
 	}
 	
 	@ExceptionHandler(NegocioException.class)
 	public ResponseEntity<?> tratarNegocioException(
 			NegocioException e){
+		
+		Problema problema = Problema.builder()
+				.dataHora(LocalDateTime.now())
+				.mensagem(e.getMessage()).build();
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body(e.getMessage());
+				.body(problema);
 	}
 
 }
