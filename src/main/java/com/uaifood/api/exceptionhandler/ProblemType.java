@@ -4,9 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum ProblemType {
+	CORPO_INVALIDO("/corpo-invalido", "O Corpo informado no json é inválido"),
 	ENTIDADE_NAO_ENCONTRADA("/entidade-nao-encontrada", "Entidade não encontrada"),
 	ENTIDADE_EM_USO("/entidade-em-uso", "Entidade em uso"),
-	ERRO_NEGOCIO("/erro-negocio", "Violação de regra de negócio");       
+	ERRO_NEGOCIO("/erro-negocio", "Violação de regra de negócio");
 
 	private String tittle;
 	private String uri;
