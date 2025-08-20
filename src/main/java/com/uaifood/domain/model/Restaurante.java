@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
@@ -27,7 +28,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uaifood.core.validation.Groups;
-import com.uaifood.core.validation.TaxaFrete;
+import com.uaifood.core.validation.Multiplo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -46,10 +47,9 @@ public class Restaurante {
 	@Column(nullable = false)
 	private String nome;
 
-	// @DecimalMin("0")
-	@NotNull 
-	//@PositiveOrZero
-	@TaxaFrete
+	@NotNull
+	@PositiveOrZero	
+	@Multiplo(numero = 5)
 	@Column(nullable = false)
 	private BigDecimal taxaFrete;
 
