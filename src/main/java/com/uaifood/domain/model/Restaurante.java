@@ -27,7 +27,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.uaifood.Groups;
+import com.uaifood.core.validation.Groups;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -48,7 +48,7 @@ public class Restaurante {
 
 	// @DecimalMin("0")
 	@NotNull 
-	@PositiveOrZero(message = "{TaxaFrete.invalida}")
+	@PositiveOrZero//(message = "{TaxaFrete.invalida}")
 	@Column(nullable = false)
 	private BigDecimal taxaFrete;
 

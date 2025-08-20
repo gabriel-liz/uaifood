@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
-import com.uaifood.Groups;
+import com.uaifood.core.validation.Groups;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

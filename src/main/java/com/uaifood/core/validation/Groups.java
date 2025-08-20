@@ -1,4 +1,4 @@
-package com.uaifood;
+package com.uaifood.core.validation;
 
 public interface Groups {
 
