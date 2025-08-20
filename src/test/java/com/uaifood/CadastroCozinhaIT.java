@@ -16,7 +16,7 @@ import com.uaifood.domain.model.Cozinha;
 import com.uaifood.domain.service.CadastroCozinhaService;
 
 @SpringBootTest
-public class CadastroCozinhaIntegrationTests {
+public class CadastroCozinhaIT {
 	
 	@Autowired
 	private CadastroCozinhaService cadastroCozinha;
