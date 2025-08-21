@@ -11,7 +11,7 @@ import com.uaifood.domain.model.Restaurante;
 
 @Component
 public class RestauranteDTOAssembler {
-
+//Classe que transforma de Entidade Restaurante para RestauranteDTO
 	public RestauranteDTO toDTO(Restaurante restaurante) {
 		CozinhaDTO cozinhaDTO = new CozinhaDTO();
 		cozinhaDTO.setId(restaurante.getCozinha().getId());

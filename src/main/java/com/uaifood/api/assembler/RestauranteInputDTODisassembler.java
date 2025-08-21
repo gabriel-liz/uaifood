@@ -8,7 +8,7 @@ import com.uaifood.domain.model.Restaurante;
 
 @Component
 public class RestauranteInputDTODisassembler {
-
+//Desmonta o RestauranteDTO e monta um Restaurante
 	public Restaurante toDomainObject(RestauranteInputDTO restauranteInputDTO) {
 		Restaurante restaurante = new Restaurante();
 		restaurante.setNome(restauranteInputDTO.getNome());
