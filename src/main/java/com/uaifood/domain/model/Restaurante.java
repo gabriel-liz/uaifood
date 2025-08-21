@@ -27,6 +27,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.uaifood.core.validation.Groups;
 import com.uaifood.core.validation.ValorZeroIncluiDescricao;
 
@@ -54,7 +55,8 @@ public class Restaurante {
 	//@Multiplo(numero = 5)
 	@Column(nullable = false)
 	private BigDecimal taxaFrete;
-
+	
+	@JsonIgnoreProperties(value = "nome", allowGetters = true)
 	@Valid
 	@ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
 	@NotNull
