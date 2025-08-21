@@ -28,7 +28,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uaifood.core.validation.Groups;
-import com.uaifood.core.validation.Multiplo;
 import com.uaifood.core.validation.ValorZeroIncluiDescricao;
 
 import lombok.Data;
@@ -52,7 +51,7 @@ public class Restaurante {
 
 	@NotNull
 	@PositiveOrZero	
-	@Multiplo(numero = 5)
+	//@Multiplo(numero = 5)
 	@Column(nullable = false)
 	private BigDecimal taxaFrete;
 
