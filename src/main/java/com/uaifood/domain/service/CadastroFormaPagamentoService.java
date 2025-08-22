@@ -23,6 +23,7 @@ public class CadastroFormaPagamentoService {
 	public void excluir(Long formaPagamentoId) {
 		try {
 			formaPagamentoRepository.deleteById(formaPagamentoId);
+			formaPagamentoRepository.flush();
 		} catch(EmptyResultDataAccessException e) {
 			throw new EntidadeNaoEncontradaException(
 				String.format("Não existe cadastro de forma de pagamento com código %d", formaPagamentoId));
