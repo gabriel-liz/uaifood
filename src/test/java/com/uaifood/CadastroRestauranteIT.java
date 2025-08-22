@@ -133,8 +133,8 @@ public class CadastroRestauranteIT {
         .when()
             .post()
         .then()
-            .statusCode(HttpStatus.NOT_FOUND.value())
-            .body("title", equalTo(RECURSO_NAO_ENCONTRADO));
+            .statusCode(HttpStatus.BAD_REQUEST.value())
+            .body("title", equalTo(DADOS_INVALIDOS_PROBLEM_TITLE));
     }
     
     @Test

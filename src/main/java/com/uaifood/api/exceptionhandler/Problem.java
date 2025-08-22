@@ -18,7 +18,7 @@ public class Problem {
 	private Integer status;
 	private OffsetDateTime timestamp;
 	private String type;
-	private String tittle;
+	private String title;
 	private String detail;	
 	
 	private String userMessage;	
