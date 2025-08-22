@@ -20,6 +20,7 @@ import com.uaifood.api.assembler.RestauranteDTOAssembler;
 import com.uaifood.api.assembler.RestauranteInputDTODisassembler;
 import com.uaifood.api.model.RestauranteDTO;
 import com.uaifood.api.model.input.RestauranteInputDTO;
+import com.uaifood.domain.exception.CidadeNaoEncontradaException;
 import com.uaifood.domain.exception.CozinhaNaoEncontradaException;
 import com.uaifood.domain.exception.NegocioException;
 import com.uaifood.domain.model.Restaurante;
@@ -64,7 +65,7 @@ public class RestauranteController {
 			Restaurante restaurante = restauranteInputDTODisassembler.toDomainObject(restauranteInputDTO);
 			
 			return restauranteDTOAssembler.toDTO(cadastroRestaurante.salvar(restaurante));
-		} catch (CozinhaNaoEncontradaException e) {
+		} catch (CozinhaNaoEncontradaException | CidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}
@@ -80,7 +81,7 @@ public class RestauranteController {
 			//			BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamento", "endereco", "dataCadastro",
 	//				"produtos");
 			return restauranteDTOAssembler.toDTO(cadastroRestaurante.salvar(restauranteAtual));
-		} catch (CozinhaNaoEncontradaException e) {
+		} catch (CozinhaNaoEncontradaException | CidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}
