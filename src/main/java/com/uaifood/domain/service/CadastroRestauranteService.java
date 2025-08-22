@@ -39,6 +39,27 @@ public class CadastroRestauranteService {
 	}
 	
 	@Transactional
+	public void ativar(Long restauranteId) {		
+		Restaurante restauranteAtual = buscarOuFalhar(restauranteId);
+		//Ao fazer o buscarOuFalhar, o findById. Essa instancia do restaurante fica em um estado gerenciado pelo contexto de persistencia do jpa
+		//Qualquer modificacao feita sera sincronizada com o banco de dados. Sem precisar ser feito o .save
+		//restauranteRestaurante.setAtivo(true);
+		restauranteAtual.ativar();
+		
+	}
+	
+	@Transactional
+	public void inativar(Long restauranteId) {		
+		Restaurante restauranteAtual = buscarOuFalhar(restauranteId);
+		//Ao fazer o buscarOuFalhar, o findById. Essa instancia do restaurante fica em um estado gerenciado pelo contexto de persistencia do jpa
+		//Qualquer modificacao feita sera sincronizada com o banco de dados. Sem precisar ser feito o .save
+		//restauranteAtual.setAtivo(false);
+		restauranteAtual.inativar();
+		 
+	}
+	
+	
+	@Transactional
 	public void excluir(Long restauranteId) {
 		try {
 			restauranteRepository.deleteById(restauranteId);
