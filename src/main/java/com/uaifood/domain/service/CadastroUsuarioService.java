@@ -2,8 +2,6 @@ package com.uaifood.domain.service;
 
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +16,12 @@ public class CadastroUsuarioService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
-	@Autowired
-	private EntityManager manager;
-	
+		
 	@Transactional
 	public Usuario salvar(Usuario usuario) {
 		
 		//comando abaixo para que o JPA nao sincronize a requisicao com o banco de dados, pois a fazer a query que deveria retornar apenas 1 resultado, ira retornar 2
-		manager.detach(usuario);
+		usuarioRepository.detach(usuario);
 		Optional<Usuario> usuarioExistente = usuarioRepository.findByEmail(usuario.getEmail());
 		
 		if(usuarioExistente.isPresent() && !usuarioExistente.get().equals(usuario) ) {
