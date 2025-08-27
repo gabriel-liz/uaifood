@@ -23,6 +23,7 @@ import com.uaifood.api.model.input.RestauranteInputDTO;
 import com.uaifood.domain.exception.CidadeNaoEncontradaException;
 import com.uaifood.domain.exception.CozinhaNaoEncontradaException;
 import com.uaifood.domain.exception.NegocioException;
+import com.uaifood.domain.exception.RestauranteNaoEncontradoException;
 import com.uaifood.domain.model.Restaurante;
 import com.uaifood.domain.repository.RestauranteRepository;
 import com.uaifood.domain.service.CadastroRestauranteService;
@@ -101,6 +102,29 @@ public class RestauranteController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void inativar(@PathVariable Long restauranteId) {
 		cadastroRestaurante.inativar(restauranteId);		
+	}
+	
+	
+	
+	@PutMapping("/ativacoes")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void ativarMultiplos(@RequestBody List<Long> restauranteIds) {
+		try {
+			cadastroRestaurante.ativar(restauranteIds);		
+		}catch (RestauranteNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}	
+		
+	}
+	
+	@DeleteMapping("/ativacoes")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void inaativarMultiplos(@RequestBody List<Long> restauranteIds) {
+		try {
+			cadastroRestaurante.inativar(restauranteIds);
+		}catch (RestauranteNaoEncontradoException e) {
+			throw new NegocioException(e.getMessage(), e);
+		}				
 	}
 	
 	
