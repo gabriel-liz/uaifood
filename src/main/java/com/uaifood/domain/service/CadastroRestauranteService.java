@@ -12,6 +12,7 @@ import com.uaifood.domain.model.Cidade;
 import com.uaifood.domain.model.Cozinha;
 import com.uaifood.domain.model.FormaPagamento;
 import com.uaifood.domain.model.Restaurante;
+import com.uaifood.domain.model.Usuario;
 import com.uaifood.domain.repository.RestauranteRepository;
 
 @Service
@@ -27,6 +28,9 @@ public class CadastroRestauranteService {
 
 	@Autowired
 	private CadastroCidadeService cadastroCidade;
+	
+	@Autowired
+	private CadastroUsuarioService cadastroUsuario;
 	
 	@Autowired
 	private CadastroFormaPagamentoService cadastroFormaPagamento;
@@ -126,6 +130,22 @@ public class CadastroRestauranteService {
 		Restaurante restauranteAtual = buscarOuFalhar(restauranteId);
 		
 		restauranteAtual.fechar();
+	}
+	
+	@Transactional
+	public void desassociarResponsavel(Long restauranteId, Long usuarioId) {
+		Restaurante restaurante = buscarOuFalhar(restauranteId);
+		Usuario usuario = cadastroUsuario.buscarOuFalhar(usuarioId);
+		
+		restaurante.removerResponsavel(usuario);
+	}
+	
+	@Transactional
+	public void associarResponsavel(Long restauranteId, Long usuarioId) {
+		Restaurante restaurante = buscarOuFalhar(restauranteId);
+		Usuario usuario = cadastroUsuario.buscarOuFalhar(usuarioId);
+		
+		restaurante.adicionarResponsavel(usuario);
 	}
 
 }
