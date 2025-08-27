@@ -87,5 +87,15 @@ public class Restaurante {
 	public boolean desassociarFormaPagamento(FormaPagamento formaPagamento) {
 		return getFormasPagamento().remove(formaPagamento);
 	}
+	
+	private Boolean aberto = Boolean.FALSE;
+	
+	public void abrir() {
+		setAberto(true);;
+	}
+	
+	public void fechar() {
+		setAberto(false);
+	}
 
 }
