@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uaifood.api.assembler.PedidoDTOAssembler;
+import com.uaifood.api.assembler.PedidoResumoDTOAssembler;
 import com.uaifood.api.model.PedidoDTO;
+import com.uaifood.api.model.PedidoResumoDTO;
 import com.uaifood.domain.model.Pedido;
 import com.uaifood.domain.repository.PedidoRepository;
 import com.uaifood.domain.service.EmissaoPedidoService;
@@ -27,11 +29,14 @@ public class PedidoController {
 	@Autowired
 	private PedidoDTOAssembler pedidoDTOAssembler;
 	
+	@Autowired
+	private PedidoResumoDTOAssembler pedidoResumoDTOAssembler;
+	
 	@GetMapping
-	public List<PedidoDTO> listar(){
+	public List<PedidoResumoDTO> listar(){
 		List<Pedido> todosPedidos = pedidoRepository.findAll();
 		
-		return pedidoDTOAssembler.toCollectionDTO(todosPedidos);
+		return pedidoResumoDTOAssembler.toCollectionDTO(todosPedidos);
 	}
 	
 	@GetMapping("/{pedidoId}")
