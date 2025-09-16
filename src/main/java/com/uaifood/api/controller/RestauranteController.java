@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.uaifood.api.assembler.RestauranteDTOAssembler;
 import com.uaifood.api.assembler.RestauranteInputDTODisassembler;
 import com.uaifood.api.model.RestauranteDTO;
 import com.uaifood.api.model.input.RestauranteInputDTO;
+import com.uaifood.api.model.view.RestauranteView;
 import com.uaifood.domain.exception.CidadeNaoEncontradaException;
 import com.uaifood.domain.exception.CozinhaNaoEncontradaException;
 import com.uaifood.domain.exception.NegocioException;
@@ -47,6 +49,18 @@ public class RestauranteController {
 	@GetMapping
 	public List<RestauranteDTO> listar() {
 		return restauranteDTOAssembler.toCollectionDTO(restauranteRepository.findAll());
+	}
+	
+	@JsonView(RestauranteView.Resumo.class)
+	@GetMapping(params = "projecao=resumo")
+	public List<RestauranteDTO> listarResumido() {
+		return listar();
+	}
+	
+	@JsonView(RestauranteView.ApenasNome.class)
+	@GetMapping(params = "projecao=apenas-nome")
+	public List<RestauranteDTO> listarApenasNome() {
+		return listar();
 	}
 
 	@GetMapping("/{restauranteId}")

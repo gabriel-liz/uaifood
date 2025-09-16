@@ -1,14 +1,11 @@
 package com.uaifood.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +20,6 @@ import com.uaifood.api.assembler.FormaPagamentoDTOAssembler;
 import com.uaifood.api.assembler.FormaPagamentoInputDTODisassembler;
 import com.uaifood.api.model.FormaPagamentoDTO;
 import com.uaifood.api.model.input.FormaPagamentoInputDTO;
-import com.uaifood.domain.exception.EntidadeEmUsoException;
-import com.uaifood.domain.exception.EntidadeNaoEncontradaException;
 import com.uaifood.domain.model.FormaPagamento;
 import com.uaifood.domain.repository.FormaPagamentoRepository;
 import com.uaifood.domain.service.CadastroFormaPagamentoService;
